@@ -1,10 +1,11 @@
 // podaci za tim
 class Team {
-	constructor(name, isoCode, ranking) {
+	constructor(name, isoCode, ranking, groupName) {
 		// osnovni podaci
 		this.name = name;
 		this.isoCode = isoCode;
 		this.ranking = ranking;
+		this.groupName = groupName;
 		// statistika
 		this.points = 0;
 		this.wins = 0;
@@ -40,6 +41,15 @@ class Team {
 		return `${this.name}\t${this.wins}/${this.losses}/${this.points}/${
 			this.pointsScored
 		}/${this.pointsConceded}/${this.getPointDifference()}`;
+	}
+
+	/**
+	 * Gleda da li su dva tima iz iste grupe
+	 * @param {*} groupName2 ime druge grupe
+	 * @returns boolean da li su u istoj grupi
+	 */
+	sameGroup(groupName2) {
+		return this.groupName === groupName2;
 	}
 }
 

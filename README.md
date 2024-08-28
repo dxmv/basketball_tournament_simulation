@@ -15,23 +15,29 @@ Ideja:
     - [x] Simulacija cele grupe
       - [x] Igramo po kolima, svaka grupa ima 3 kola
 
-  - [ ] Rangiramo timove po pravilima
+  - [x] Rangiranje
+
+    - [x] Kada 2 tima imaju isti skor
+    - [x] Kada 3 tima imaju isti skor
 
   - [x] Ouput za svaku grupu, odigrane utakmice i tabela te grupe
 
     - [x] Output kola
     - [x] Output tabela
 
-  - [ ] Kvalifikacija timova iz grupne faze po zadatim pravilima
+  - [x] Kvalifikacija timova iz grupne faze po zadatim pravilima
 
 - [ ] Kvalifikacije
 
   - [ ] Zreb
 
-    - [ ] Deljenje u sesire
+    - [x] Deljenje u sesire
     - [ ] Random kombinacije u sesirima
+      - [x] Random element funkcija
+      - [ ] Timovi iz grupne faze ne mogu igrati opet
+      - [ ] Mesanje sesira
+    - [x] Prikaz sesira i utakmica iz sesira
     - [ ] Simulacija utakmica sesira
-    - [ ] Prikaz sesira i koje je prosao
 
   - [ ] Eliminaciona faza
 

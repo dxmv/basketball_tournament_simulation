@@ -3,7 +3,7 @@ class Match {
 	constructor(team1, team2) {
 		this.team1 = team1;
 		this.team2 = team2;
-		this.mec = this.simulateMatch();
+		this.match = this.simulateMatch();
 	}
 
 	/**
@@ -47,11 +47,11 @@ class Match {
 
 	// Australija - Španija (92:80)
 	toString() {
-		const team1Winner = this.mec.winner.name === this.team1.name;
+		const team1Winner = this.match.winner.name === this.team1.name;
 		if (team1Winner) {
-			return `${this.team1.name} - ${this.team2.name} (${this.mec.winnerScore} - ${this.mec.loserScore})`;
+			return `${this.team1.name} - ${this.team2.name} (${this.match.winnerScore} - ${this.match.loserScore})`;
 		}
-		return `${this.team1.name} - ${this.team2.name} (${this.mec.loserScore} - ${this.mec.winnerScore})`;
+		return `${this.team1.name} - ${this.team2.name} (${this.match.loserScore} - ${this.match.winnerScore})`;
 	}
 }
 
