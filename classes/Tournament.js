@@ -145,6 +145,26 @@ class Tournament {
 		this.knockoutStages.quarterFinals.map(match =>
 			console.log(`\t\t${match.toString()}`)
 		);
+
+		// ispis polu finala
+		console.log("Polu finale:");
+		this.knockoutStages.semiFinals.map(match =>
+			console.log(`\t\t${match.toString()}`)
+		);
+
+		// ispis treceg mesta
+		console.log("Trece mesto:");
+		console.log(`\t\t${this.knockoutStages.thirdPlace.toString()}`);
+
+		// ispis finala
+		console.log("Finale:");
+		console.log(`\t\t${this.knockoutStages.finals.toString()}`);
+
+		// ispis prva 3 mesta
+		console.log("Medalje");
+		console.log(`\t 1. ${this.knockoutStages.finals.match.winner.name}`);
+		console.log(`\t 2. ${this.knockoutStages.finals.match.loser.name}`);
+		console.log(`\t 3. ${this.knockoutStages.thirdPlace.match.winner.name}`);
 	}
 
 	drawKnockoutStage() {
@@ -157,8 +177,33 @@ class Tournament {
 			this.knockoutStages.quarterFinals = matches;
 		};
 
+		const drawSemiFinals = teams => {
+			const matches = [];
+
+			// znamo da su prva dva pobednika iz sesira d i g
+			// druga dva su iz sesira e i f
+			this.createMatches(teams.slice(0, 2), teams.slice(2, 4), matches);
+
+			this.knockoutStages.semiFinals = matches;
+		};
+
 		this.pots = this.createPots();
 		drawQuarterFinals();
+		// pobednici meceva
+		const semiFinalTeams = this.knockoutStages.quarterFinals.map(
+			match => match.match.winner
+		);
+		drawSemiFinals(semiFinalTeams);
+		// pobednici polu finala idu u finale
+		this.knockoutStages.finals = new Match(
+			this.knockoutStages.semiFinals[0].match.winner,
+			this.knockoutStages.semiFinals[1].match.winner
+		);
+		// gubitnici idu za trece mesto
+		this.knockoutStages.thirdPlace = new Match(
+			this.knockoutStages.semiFinals[0].match.loser,
+			this.knockoutStages.semiFinals[1].match.loser
+		);
 	}
 
 	/**

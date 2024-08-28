@@ -27,19 +27,27 @@ Ideja:
 
   - [x] Kvalifikacija timova iz grupne faze po zadatim pravilima
 
-- [ ] Kvalifikacije
+- [x] Kvalifikacije
 
-  - [ ] Zreb
+  - [x] Zreb
 
     - [x] Deljenje u sesire
-    - [ ] Random kombinacije u sesirima
+    - [x] Random kombinacije u sesirima
       - [x] Random element funkcija
-      - [ ] Timovi iz grupne faze ne mogu igrati opet
-      - [ ] Mesanje sesira
+      - [x] Timovi iz grupne faze ne mogu igrati opet
+      - [x] Mesanje sesira
     - [x] Prikaz sesira i utakmica iz sesira
-    - [ ] Simulacija utakmica sesira
+    - [x] Simulacija utakmica sesira
 
-  - [ ] Eliminaciona faza
+  - [x] Polu finale
+  - [x] Finale
+  - [x] Trece mesto
+  - [x] Ispis pozicija
+
+- [ ] Dodatno
+
+  - [ ] Fix bug kada pri pravljenju kombinacija sesira
+  - [ ] Lepsi kod
 
 - [ ] Bonus
   - [ ] Za tim dodati neku promenljivu koja oznacava formu
