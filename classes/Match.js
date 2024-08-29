@@ -11,12 +11,35 @@ class Match {
 	 * @returns Objekat koji sadrzi pobednika, gubitnika i skor
 	 */
 	simulateMatch() {
+		// Odredjivanje slabijeg tima
+		const weakerTeam =
+			this.team1.ranking > this.team2.ranking ? this.team2 : this.team1;
+		const strongerTeam = weakerTeam === this.team1 ? this.team2 : this.team1;
+
+		// prvo racunamo apsolutnu razliku ranga timova
+		// kada je razlika veca od 10, sanse su mnogo vece da drugi tim odustane
+		// taj broj mnozimo sa veoma malim brojem zato sto su sanse odustajanja veoma male
+		const forfeitChance =
+			(Math.abs(this.team1.ranking, this.team2.ranking) / 10) * 0.001;
+		// provera da li slabiji tim odustaje
+		if (Math.random() < forfeitChance) {
+			strongerTeam.updateStats(0, 0, "WIN");
+			weakerTeam.updateStats(0, 0, "FOREFIT");
+
+			return {
+				winner: strongerTeam,
+				loser: weakerTeam,
+				winnerScore: 0,
+				loserScore: 0,
+			};
+		}
+
 		// Pretpostavimo da igraju 2. najjaci tim i 8. najjaci tim
 		// totalRanking = 2 + 8 = 10
-		// team1Probability = 1 - (2 / 10) = 1 - 0.2 = 0.8
+		// team1Probability = 8 / 10 = 0.8
 		// Tim 1 ima 80% sanse da pobedi
 		const totalRanking = this.team1.ranking + this.team2.ranking;
-		const team1Probability = 1 - this.team1.ranking / totalRanking;
+		const team1Probability = this.team2.ranking / totalRanking;
 
 		let winner;
 		let loser;
@@ -34,8 +57,8 @@ class Match {
 		const loserScore = winnerScore - Math.floor(Math.random() * 40) - 1; // 1-40 poena manje
 
 		// updateovanje tog tima
-		winner.updateStats(winnerScore, loserScore, true);
-		loser.updateStats(loserScore, winnerScore, false);
+		winner.updateStats(winnerScore, loserScore, "WIN");
+		loser.updateStats(loserScore, winnerScore, "LOSS");
 
 		return {
 			winner,

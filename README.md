@@ -1,16 +1,16 @@
 Ideja:
 
-- [ ] Grupna faza
+- [x] Grupna faza
 
   - [x] Citamo informacije o grupama
 
     - [x] Klasa "Grupa" koja u sebi sadrzi timove, odigrane meceve i ime
     - [x] Klasa "Tim" koja sadrzi osnovne informacije o timu(ime, ranking i skracenicu) i statistiku
 
-  - [ ] Igramo utakmice
+  - [x] Igramo utakmice
 
-    - [ ] Simulacija jednog meca
-      - [ ] Sto je veca razlika ranka, veca je sansa da tim sa manjim rankom odustane
+    - [x] Simulacija jednog meca
+      - [x] Sto je veca razlika ranka, veca je sansa da tim sa manjim rankom odustane
       - [x] Racunanje sanse pobede timova na osnovu ranka
     - [x] Simulacija cele grupe
       - [x] Igramo po kolima, svaka grupa ima 3 kola
@@ -44,11 +44,11 @@ Ideja:
   - [x] Trece mesto
   - [x] Ispis pozicija
 
-- [ ] Dodatno
+- [x] Fix
 
-  - [ ] Fix bug kada pri pravljenju kombinacija sesira
-  - [ ] Lepsi kod
+  - [x] Fix bug kada pri pravljenju kombinacija sesira
 
 - [ ] Bonus
   - [ ] Za tim dodati neku promenljivu koja oznacava formu
+    - [ ] Racunanje forme na osnovu pobeda i razlike poena
   - [ ] To dodati u racunanje verovatnoce pobede u mecu

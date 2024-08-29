@@ -1,3 +1,4 @@
+const fs = require("fs");
 // podaci za tim
 class Team {
 	constructor(name, isoCode, ranking, groupName) {
@@ -12,6 +13,7 @@ class Team {
 		this.losses = 0;
 		this.pointsScored = 0;
 		this.pointsConceded = 0;
+		this.form = this.friendlyTraining();
 	}
 
 	/**
@@ -20,15 +22,35 @@ class Team {
 	 * @param {*} conceded koliko je primio
 	 * @param {*} won da li je pobedio
 	 */
-	updateStats(scored, conceded, won) {
+	updateStats(scored, conceded, result) {
 		this.pointsScored += scored;
 		this.pointsConceded += conceded;
-		if (won) {
+		if (result == "WIN") {
 			this.wins++;
 			this.points += 2;
-		} else {
+		} else if (result == "LOSS") {
 			this.losses++;
 			this.points += 1;
+		}
+		// predaja
+		else {
+			this.losses++;
+		}
+	}
+
+	/**
+	 * Igranje prijateljskih meceva
+	 *
+	 * */
+	friendlyTraining() {
+		// citamo fajl
+		const games = JSON.parse(fs.readFileSync("./exibitions.json", "utf8"))[
+			this.isoCode
+		];
+		// rezultat utakmice izgleda ovako "100-11", gde je prvi deo rezultata, broj poena trenutne ekipe
+		// izracunacemo ukupnu razliku poena za ove prijateljske utakmice
+		let pd = 0;
+		for (let game of games) {
 		}
 	}
 
