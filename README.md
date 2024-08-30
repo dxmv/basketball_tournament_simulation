@@ -47,8 +47,11 @@ Ideja:
 - [x] Fix
 
   - [x] Fix bug kada pri pravljenju kombinacija sesira
+  - [x] Fix bug undefined ranking polu finale
+  - [x] Fix bug kada tim igra u oba polu finala
 
-- [ ] Bonus
-  - [ ] Za tim dodati neku promenljivu koja oznacava formu
-    - [ ] Racunanje forme na osnovu pobeda i razlike poena
-  - [ ] To dodati u racunanje verovatnoce pobede u mecu
+- [x] Bonus
+  - [x] Za tim dodati neku promenljivu koja oznacava formu
+    - [x] Racunanje forme na osnovu broja pobeda i razlike poena
+    - [x] Update forme
+  - [x] To dodati u racunanje verovatnoce pobede u mecu

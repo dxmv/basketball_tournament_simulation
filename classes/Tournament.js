@@ -8,8 +8,9 @@ const Match = require("./Match");
 class Tournament {
 	constructor() {
 		this.groups = this.loadGroups();
-		this.knockoutTeams = [];
-		this.pots = [];
+		this.knockoutTeams = []; // timovi koji su prosli u knockout fazu
+		this.pots = []; // sesiri
+		// svi mecevi knockout faze
 		this.knockoutStages = {
 			quarterFinals: [],
 			semiFinals: [],
@@ -182,7 +183,12 @@ class Tournament {
 
 			// znamo da su prva dva pobednika iz sesira d i g
 			// druga dva su iz sesira e i f
-			this.createMatches(teams.slice(0, 2), teams.slice(2, 4), matches);
+			const combinationDG = teams.slice(0, 2);
+			const combinationEF = teams.slice(2, 4);
+
+			// moguce su samo 2 kombinacije, prvi tim iz DG protiv prvog tima iz EF
+			// prvi tim iz DG protiv drugog tima iz EF
+			this.createMatches(combinationDG, combinationEF, matches);
 
 			this.knockoutStages.semiFinals = matches;
 		};
@@ -214,45 +220,19 @@ class Tournament {
 	 * @param matches
 	 */
 	createMatches(arr1, arr2, matches) {
-		// kopija arr2
-		const availableTeams = [...arr2];
+		// moguce su samo 2 kombinacije
+		// za cetvrt finale prvi tim iz d i prvi tim iz g
+		// ili prvi tim iz d i drugi tim iz g
 
-		// za svaki od timova, filtiramo timove, da bismo dobili samo timove sa kojim mogu da igraju
-		let combinations = {};
-
-		// validni timovi
-		for (let i = 0; i < arr1.length; i++) {
-			// validni su oni koji nisu u istoj grupi
-			const validOpponents = availableTeams.filter(
-				team2 => !arr1[i].sameGroup(team2.groupName)
-			);
-			combinations[i] = validOpponents;
+		// za polu finale, prvi tim iz DG protiv prvog tima iz EF
+		// prvi tim iz DG protiv drugog tima iz EF
+		if (Math.random() < 0.5) {
+			matches.push(new Match(arr1[0], arr2[0]));
+			matches.push(new Match(arr1[1], arr2[1]));
+		} else {
+			matches.push(new Match(arr1[0], arr2[1]));
+			matches.push(new Match(arr1[1], arr2[0]));
 		}
-
-		// set timova koji su vec u kombinaciji
-		const combined = new Set();
-		// sortiramo na osnovu broja timova koji su validni
-		Object.entries(combinations)
-			.sort((a, b) => a[1].length - b[1].length)
-			.forEach(comb => {
-				// kombinacija je moguca samo sa 1 timom
-				if (comb[1].length == 1) {
-					// dodajemo mec i dodajemo ranking u combined
-					matches.push(new Match(arr1[comb[0]], comb[1][0]));
-					combined.add(comb[1][0].ranking);
-				}
-				// kombinacija je moguca sa vise timova
-				else {
-					// pokusavamo da napravimo kombinaciju
-					// sve dok nadjemo tim koji nije u kombinaciji
-					let match = this.getRandomElement(comb[1]);
-					while (combined.has(match.ranking)) {
-						match = this.getRandomElement(comb[1]);
-					}
-					matches.push(new Match(arr1[comb[0]], match));
-					combined.add(match.ranking);
-				}
-			});
 	}
 
 	/**
@@ -265,9 +245,8 @@ class Tournament {
 		return array[index];
 	}
 
-	// simulate the whole tournament
+	// simulacija turnira
 	simulateTournament() {
-		this.loadGroups();
 		this.simulateGroupStage();
 		this.printGroupStageResults();
 		this.knockoutTeams = this.knockoutStageTeams();

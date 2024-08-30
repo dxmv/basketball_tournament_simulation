@@ -20,7 +20,7 @@ class Match {
 		// kada je razlika veca od 10, sanse su mnogo vece da drugi tim odustane
 		// taj broj mnozimo sa veoma malim brojem zato sto su sanse odustajanja veoma male
 		const forfeitChance =
-			(Math.abs(this.team1.ranking, this.team2.ranking) / 10) * 0.001;
+			(Math.abs(this.team1.ranking - this.team2.ranking) / 10) * 0.001;
 		// provera da li slabiji tim odustaje
 		if (Math.random() < forfeitChance) {
 			strongerTeam.updateStats(0, 0, "WIN");
@@ -39,7 +39,8 @@ class Match {
 		// team1Probability = 8 / 10 = 0.8
 		// Tim 1 ima 80% sanse da pobedi
 		const totalRanking = this.team1.ranking + this.team2.ranking;
-		const team1Probability = this.team2.ranking / totalRanking;
+		let team1Probability = this.team2.ranking / totalRanking;
+		team1Probability += this.team1.form; // dodajemo i formu koja je izmedju -0.1 i 0.1
 
 		let winner;
 		let loser;
